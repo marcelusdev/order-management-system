@@ -1,0 +1,166 @@
+<div class="container-fluid text-white fs-2 px-3 py-0" id="container-1">
+	<div class="row container-fluid">
+		<div data-pedidos="voltar-pedidos" class="col-5 text-start fw-semibold cursor-pointer text-nowrap" id="novo-pedido">
+			<a [routerLink]="['/home']" id="span" class="p-2 rounded-3 "><i class="bi bi-arrow-left" id="seta-esquerda"></i> Voltar para o painel</a>
+		</div>
+		     <div class="col-3 text-center my-1"> <a [routerLink]="['/home']"><img data-pedidos="img" id="img" src="/assets/icons/logo.png" width="110px"/></a></div>
+		<div data-pedidos="fazer-pedido" class="col-4 text-end fw-semibold text-nowrap" id="pedidos">Faça seu pedido!</div>
+	</div>
+</div>
+
+
+<div *ngIf="exibirMensagem" 
+class="bg-success w-25 text-center z-1 top-0 my-0 position-fixed alert-success p-2 text-white" 
+style="white-space: pre-line; font-size: 19px;"
+id="msg-sucesso" 
+role="alert">
+	<fa-icon [icon]="faUpLong" class=" fs-1"></fa-icon> 
+	<br/>
+  {{ mensagemSucesso }}
+</div>
+
+<div class="w-50 my-3 mx-auto position-relative bg-primary.bg-gradient" id="novo-pedido-container">
+	
+	<p class=" bg-dark fs-3 text-center p-2 m-0 text-light fw-bold">NOVO PEDIDO</p>
+
+	<!--ng MODEL: CONHECIDA COMO VIA DE MÃO A DUPLA (TWO WAY DATA BINDING) ENVIA O VALOR DO INPUT DIRETAMENTE PARA A VARIÁVEL clienteNome, seguindo
+	a lógica estabelecida no component, e caso algo seja alterado no mesmo, o imput atualiza seu valor de acordo com a variável-->
+	<!--keydown e paste fazem sobre o ato de pressionar uma tecla e colar conteúdo-->
+	<!--E o @if obdece a lógica condicional (só irá exibir a mensagem de erro se não preencher o input)-->
+	<div class="w-100 bg-success-subtle mx-auto p-3">
+		<div class="w-100">
+			<p class="px-1 m-0 fw-semibold fs-5">Nome e sobrenome do cliente</p>
+			<input placeholder="Rancho's Pizzaria" 
+			type="search" 
+			class=" p-2 form-control text-dark border-1 border-secondary-subtle rounded-2 w-100"
+			[(ngModel)]="clienteNome" 
+			(keydown)="permitirApenasDuasPalavras($event)"
+			(paste)="limitarPaste($event)"
+			/>
+			@if (erroNome) {<p class="text-danger mt-1">{{ erroNome }}</p>}
+		</div>
+
+
+		<div class="w-100 mx-auto row">
+
+			<p class="px-1 mt-2 m-0 fw-semibold fs-5">Faça seu pedido</p>
+
+			<div class="p-0 d-flex" id="container-select">
+				<select class="w-100 border-1 border-secondary-subtle rounded-2 form-select px-2" [(ngModel)]="pizzaInteira"> <!--Aqui o ngModel se comporta da mesma form que no input do nome, só q agora associando o valor do option a lógica do pizzaInteira-->
+					<option value="" disabled>Pizzas Inteiras</option>
+					<option value="Frango com Catupiry">Frango com Catupiry</option>
+					<option value="Calabresa">Calabresa</option>
+					<option value="Portuguesa">Portuguesa</option>
+					<option value="Quatro Queijos">Quatro Queijos</option>
+					<option value="Marguerita">Marguerita</option>
+				</select>
+				<div id="icons">
+					<!--Aqui o evento de click aplica a lógica de aumentar o diminuir a quantidade de produtos selecionados-->
+					<span id="icon-plus" (click)="aumentarQuantidadePizzaInteira()">+</span>
+					<p class="" id="number">{{ quantidadePizzaInteira }}</p>
+					<span id="icon-" (click)="diminuirQuantidadePizzaInteira()">-</span>
+				</div>
+			</div>
+
+			<div class="p-0 d-flex" id="container-select">
+
+				<div class="w-50" style="position: relative;">	
+
+					<select class="w-100 border-1 border-secondary-subtle rounded-2 form-select my-2 px-2" 
+					style="padding-right: 50px;"
+						[(ngModel)]="pizzaMeio1"
+					>
+					<option disabled value="">Pizzas Meio a Meio</option>
+					<option value="Frango com Catupiry">Frango com Catupiry</option>
+					<option value="Calabresa">Calabresa</option>
+					<option value="Portuguesa">Portuguesa</option>
+					<option value="Quatro Queijos">Quatro Queijos</option>
+					<option value="Marguerita">Marguerita</option>
+					</select>
+					<div id="icons" style="top: 8px; right: 25px;">
+						<span id="icon-plus" (click)="aumentarMeioMeio()">+</span>
+						<p class="" id="number">{{ quantidadeMeioMeio }}</p>
+						<span id="icon-" (click)="diminuirMeioMeio()">-</span>
+					</div>
+				</div>
+
+				<div class="w-50" style="position: relative;">	
+
+					<select class="w-100 border-1 border-secondary-subtle rounded-2 form-select my-2 px-2" 
+					style="padding-right: 50px;"
+					[(ngModel)]="pizzaMeio2"
+					>
+						<option disabled value="">Pizzas Meio a Meio</option>
+						<option value="Frango com Catupiry">Frango com Catupiry</option>
+						<option value="Calabresa">Calabresa</option>
+						<option value="Portuguesa">Portuguesa</option>
+						<option value="Quatro Queijos">Quatro Queijos</option>
+						<option value="Marguerita">Marguerita</option>
+					</select>
+
+					<div id="icons" style="top: 8px;  right: 30px;">
+						<span id="icon-plus" (click)="aumentarMeioMeio()">+</span>
+						<p class="" id="number">{{ quantidadeMeioMeio }}</p>
+						<span id="icon-" (click)="diminuirMeioMeio()">-</span>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="p-0 d-flex" id="container-select">
+
+				<select class="w-100 border-1 border-secondary-subtle rounded-2 form-select px-2" [(ngModel)]="bebida">
+					<option disabled value="">Bebidas</option>
+					<option value="Coca-Cola">Coca-Cola</option>
+					<option value="Suco de Laranja">Suco de Laranja</option>
+					<option value="Agua Natural">Água Natural</option>
+					<option value="Gatorade">Gatorade</option>
+					<option value="H2OH">H2OH</option>
+				</select>
+
+				<div id="icons">
+					<span id="icon-plus" (click)="aumentarBebidas()">+</span>
+					<p class="" id="number"> {{quantidadeBebidas}} </p>
+					<span id="icon-" (click)="diminuirBebidas()">-</span>
+				</div>
+
+			</div>
+
+
+			<button class="btn btn-primary my-2 py-2" type="submit" (click)="adicionarAoCarrinho()">
+				<fa-icon [icon]="faCartShopping" id="chevron"></fa-icon> Adicionar ao carrinho <fa-icon [icon]="faCartShopping" id="chevron"></fa-icon>
+			</button>
+
+			@if (erroCarrinho) {<p class="text-danger">{{ erroCarrinho }}</p>}
+
+			<p class="px-1 mt-2 mb-1 fw-semibold">Confira seu pedido</p>
+
+			<div class="form-control p-2 text-secondary" style="height: auto; min-height: 100px; overflow-y: auto;">
+
+				<!--Usamos o for para criar o loop, o item que é o nome q usamos temporariamente dentro do loop para se referir a cada objeto do array, e o 
+				carrinho que é o próprio array q criamos.
+				E atribuimos o index (posição do índice) ao track, para que não recrie a lista do zero, toda vez q houver uma alteração. 
+				E por fim atribuimmos a let = i para que futuramente a use na lógica de remover item do carrinho, rastreando sua posição no array-->
+				@for (item of carrinho; track $index; let i = $index) {
+					<div class="d-flex justify-content-between align-items-center mb-1">
+					<span>{{ item.quantidade }}x {{ item.item }}</span> <!--Formatação do nome do item no carrinho com sua quantidade e nome-->
+					<button class="btn btn-sm btn-danger" (click)="removerItem(i)">Remover</button><!--Botão para remover o item, com a lógica removerItem, tendo o i como parâmatro p identificar a posição correta do item no array-->
+					</div>
+				} @empty { <!--Constando que inicia com o carrinho vazio, e so renderiza algo, a partir do momento q for adicionado ao carrinho-->
+					<div class="text-secondary">
+						Pedidos adicionados ao carrinho estarão aqui
+					</div>
+				}
+			</div>
+
+			<button class="btn btn-primary bg-success border-primary-subtle mt-3 py-2" 
+			id="enviar"
+			type="submit" 
+			(click)="finalizarPedido()">Finalizar Pedido <!--Lógica do finalizarPedido e enviar ao painel, finalizada através do click-->
+			</button>
+		</div>
+
+	</div>
+
+</div>

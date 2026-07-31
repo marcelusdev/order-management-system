@@ -1,0 +1,197 @@
+*{
+ margin:0;
+ padding:0;
+ box-sizing: border-box;
+}
+
+html,body{
+  height:100%;
+  font-family: 'Poppins', sans-serif;
+}
+                                                              
+
+
+                                                            /*HEADER*/
+#container-1{
+  background-color:#ff9900d0;
+}
+
+#seta-esquerda{
+  position: relative;
+  top: 3px;
+}
+
+#novo-pedido{
+  cursor: pointer;}
+
+#span{
+  background-color:#ff7b00;
+  text-decoration: none;
+  color: white;
+}
+
+#pedidos{margin-top: 33px;}
+
+#novo-pedido{margin-top:33px;}
+
+#span:hover #seta-esquerda {
+  display: inline-block;
+  animation: vaiVoltaLado 0.6s ease-in-out infinite;
+}
+
+#img{
+  position: relative;
+  right: 23px;
+}
+
+@keyframes vaiVoltaLado {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(8px); }
+  50%  { transform: translateX(0); }
+  75%  { transform: translateX(-8px); }
+  100% { transform: translateX(0); }
+}
+
+                                                        /*CONTAINERS PRINCIPAIS*/
+
+
+#preparando, #entregues, #cancelados, #concluidos{
+  width: 25%;
+  font-weight: bold;
+  flex-wrap: nowrap;
+  margin: auto 0;
+}
+
+#cliente-options #preparando{
+  background: repeating-linear-gradient(
+    45deg,
+    #ffeb3b,
+    #ffeb3b 10px,
+    #fdd835 10px,
+    #fdd835 20px
+  );
+  animation: mover-background 1s linear infinite;
+}
+
+@keyframes mover-background {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 50px;
+  }
+
+}
+
+#cliente-options #cancelados{
+  background-color: #e53935; /* vermelho claro inicial */
+  animation: pulsar-vermelho 1s ease-in-out infinite;
+}
+
+@keyframes pulsar-vermelho {
+  0% {
+    background-color: #e53935; /* vermelho claro */
+  }
+  50% {
+    background-color: #b71c1c; /* vermelho mais escuro */
+  }
+  100% {
+    background-color: #e53935; /* volta pro vermelho claro */
+  }
+
+}
+
+#cliente-options #concluidos{
+  background-color: #4caf50;
+  animation: sucesso-pulse 1s ease-in-out infinite;
+}
+
+@keyframes sucesso-pulse {
+  to{
+    transform: scale(1.09);
+    background-color: #145816;
+  }
+}
+
+#cliente-options #entregues{
+  background-color: rgb(108,117,125);
+}
+
+
+
+
+
+
+#chevron{
+  color: rgb(0, 0, 88); 
+  border-radius: 50%; 
+  width: 23px; 
+  height: 23px; 
+  padding: 3px;
+  cursor: pointer;
+}
+
+#chevron:hover{
+  background-color: rgb(99, 110, 161); 
+}
+
+
+
+
+
+@media screen and (max-width: 700px){
+
+  #novo-pedido{
+    font-size: 25px;
+    margin-top: 40px;
+  }
+
+  #pedidos{
+    margin-top: 35px;
+  }
+
+  #seta-esquerda{
+    top: 1px;
+  }
+
+  
+}
+
+@media screen and (max-width: 620px) {
+    
+  #cliente-options{
+    font-size: 15px;
+    width: 90% !important;
+  }
+
+  #status{
+    width: 90% !important;
+  }
+
+  #chevron{padding: 4px;}
+  
+} 
+
+@media screen and (max-width: 590px) {
+
+  #cliente-options{
+    font-size: 13px;
+    width: 95% !important;
+  }
+
+  #status{
+    width: 95% !important;
+  }
+
+  #chevron{padding: 5px ;}
+
+  #img{
+    width: 100px;
+  }
+
+  #novo-pedido{
+    font-size: 20px;
+    margin-top: 40px;
+  }
+
+}

@@ -1,0 +1,195 @@
+*{
+ margin:0;
+ padding:0;
+ box-sizing: border-box;
+}
+
+html,body{
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+#pedidos{
+    margin-top: 35px;
+}
+
+
+#options, #pedido-preparando{
+  font-size: 18px;
+}       
+
+#editar, #confirmar{
+    margin-top: -3px !important;
+    position: relative;
+    left: 8px;
+}
+
+#confirmar{
+  opacity: 0.93;
+}
+
+#confirmar:hover{
+  opacity: 1;
+}
+
+#pedido-preparando #concluidos, #pedido-preparando #cancelados, #pedido-preparando #entregues{
+  display: none;
+}
+
+#options-edit{
+  position: relative;
+  left: 50%;
+  top: -45px;
+  width: 100%;
+  height: 100px;
+}
+
+#options-edit p{
+  max-width: 20%;
+  width: 250px;
+  cursor: pointer;
+}
+
+#options-edit #concluidos, #options-edit #cancelados, #options-edit #entregues, #options-edit #preparando{
+  opacity: 0.7;
+}
+
+#options-edit #concluidos:hover, #options-edit #cancelados:hover, #options-edit #entregues:hover, #options-edit #preparando:hover{
+ opacity: 1 !important;
+}
+
+#img-center{
+  margin: auto;
+  width: 100px;
+  padding: 0;
+}
+
+#preparando, #entregues, #cancelados, #concluidos{
+  width: 25%;
+  font-weight: bold;
+  flex-wrap: nowrap;
+  margin: 0;
+}
+
+#cliente-options #preparando{
+  background: repeating-linear-gradient(
+    45deg,
+    #ffeb3b,
+    #ffeb3b 10px,
+    #fdd835 10px,
+    #fdd835 20px
+  );
+  animation: mover-background 1s linear infinite;
+}
+
+@keyframes mover-background {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 50px;
+  }
+
+}
+
+#cliente-options #cancelados{
+  background-color: #e53935; /* vermelho claro inicial */
+  animation: pulsar-vermelho 1s ease-in-out infinite;
+}
+
+@keyframes pulsar-vermelho {
+  0% {
+    background-color: #e53935; /* vermelho claro */
+  }
+  50% {
+    background-color: #b71c1c; /* vermelho mais escuro */
+  }
+  100% {
+    background-color: #e53935; /* volta pro vermelho claro */
+  }
+
+}
+
+#cliente-options #concluidos{
+  background-color: #4caf50;
+  animation: sucesso-pulse 1s ease-in-out infinite;
+}
+
+@keyframes sucesso-pulse {
+  to{
+    transform: scale(1.09);
+    background-color: #145816;
+  }
+}
+
+#cliente-options #entregues{
+  background-color: rgb(108,117,125);
+}
+
+
+
+
+@media screen and (max-width: 800px){
+
+  [data-controle="options"]{
+    width: 90% !important;
+  } 
+
+  #img{width: 80px !important;}
+
+  #img-center{width: 80px !important;}
+
+  #pedidos{
+    font-size: 22px;
+    margin-top: 30px;
+  }
+
+  #buscador{
+    font-size: 22px;
+  }
+
+}
+
+@media screen and (max-width: 650px){
+
+  #editar, #confirmar{
+      font-size: 14px !important;
+   }
+   
+  [data-controle="options"]{
+    width: 95% !important;
+  } 
+
+  #pedidos{
+    font-size: 20px;
+    margin-top: 30px;
+  }
+
+  #buscador{
+    font-size: 20px;
+  }
+
+}
+
+@media screen and (max-width: 590px) {
+
+  #pedido-preparando{font-size: 14px !important;}
+
+  #editar, #confirmar{
+    font-size: 13px !important;
+    padding: 2px 2px !important;
+  }
+
+  #img{
+    position: relative;
+    left: 5px;
+  }
+
+  #pedidos{
+    font-size: 17px;
+    margin-top: 30px;
+  }
+  
+  #options{font-size: 16px;}
+}

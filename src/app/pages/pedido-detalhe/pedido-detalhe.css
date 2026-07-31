@@ -1,0 +1,158 @@
+*{
+ margin:0;
+ padding:0;
+ box-sizing: border-box;
+}
+
+html,body{
+  height:100%;
+  font-family: 'Poppins', sans-serif;
+}
+
+#container-1{
+  background-color:#ff9900d0;
+}
+
+#img{
+  position: relative;
+  left: 2px;
+}
+
+#seta-esquerda{
+  position: relative;
+  top: 3px;
+}
+
+#novo-pedido{
+  cursor: pointer;}
+
+#span{
+  background-color:#ff7b00;
+  text-decoration: none;
+  color: white;
+}
+
+#pedidos{margin-top: 33px;}
+
+#novo-pedido{margin-top:33px;}
+
+#span:hover #seta-esquerda {
+  display: inline-block;
+  animation: vaiVoltaLado 0.6s ease-in-out infinite;
+}
+
+@keyframes vaiVoltaLado {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(8px); }
+  50%  { transform: translateX(0); }
+  75%  { transform: translateX(-8px); }
+  100% { transform: translateX(0); }
+}
+
+
+
+#preparando{
+  background: repeating-linear-gradient(
+    45deg,
+    #ffeb3b,
+    #ffeb3b 10px,
+    #fdd835 10px,
+    #fdd835 20px
+  );
+  animation: mover-background 1s linear infinite;
+}
+
+@keyframes mover-background {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 50px;
+  }
+
+}
+
+#cancelados{
+  background-color: #e53935; /* vermelho claro inicial */
+  animation: pulsar-vermelho 1s ease-in-out infinite;
+}
+
+@keyframes pulsar-vermelho {
+  0% {
+    background-color: #e53935; /* vermelho claro */
+  }
+  50% {
+    background-color: #b71c1c; /* vermelho mais escuro */
+  }
+  100% {
+    background-color: #e53935; /* volta pro vermelho claro */
+  }
+
+}
+
+#concluidos{
+  background-color: #4caf50;
+  animation: sucesso-pulse 1s ease-in-out infinite;
+}
+
+@keyframes sucesso-pulse {
+  to{
+    transform: scale(1.09);
+    background-color: #145816;
+  }
+}
+
+#entregues{
+  background-color: rgb(108,117,125);
+}
+
+
+
+@media screen and (max-width: 1000px){
+  
+    [data-pedidos="voltar-pedidos"]{
+        font-size: 22px;    
+    }
+
+    [data-pedidos="img"]{
+        width: 90px !important;
+    }
+
+    [data-pedidos="fazer-pedido"]{
+        font-size: 22px;
+    } 
+
+    #seta-esquerda{
+        top: 2px;
+    }
+}
+
+@media screen and (max-width: 700px){
+
+    #novo-pedido-container{
+        width: 90% !important;
+    }
+  
+    [data-pedidos="voltar-pedidos"]{
+        font-size: 16px !important;
+        margin-top: 40px !important;    
+        padding: 0;
+        margin: auto;
+
+    }
+
+    [data-pedidos="img"]{
+        width: 90px !important;
+    }
+
+    [data-pedidos="fazer-pedido"]{
+        font-size: 19px;
+        margin-top: 38px !important;
+        padding: 0 7px;
+    } 
+    
+    #seta-esquerda{
+        top: 2px;
+    }
+
+}

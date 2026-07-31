@@ -1,0 +1,74 @@
+<div class="container-fluid text-white fs-2 px-3 py-0" id="container-1">
+  <div class="row container-fluid">
+    <div data-pedidos="voltar-pedidos" class="col-5 text-start fw-semibold cursor-pointer text-nowrap" id="novo-pedido">
+      <a [routerLink]="['/home']" id="span" class="p-2 rounded-3 ">
+        <i class="bi bi-arrow-left" id="seta-esquerda"></i> Voltar para pedidos
+      </a>
+    </div>
+    <div class="col-3 text-center my-1">
+      <a [routerLink]="['/home']"><img data-pedidos="img" id="img" src="/assets/icons/logo.png" width="110px"/></a>
+    </div>
+    <div data-pedidos="fazer-pedido" class="col-4 text-end fw-semibold text-nowrap" id="pedidos">
+      Pedido Realizado!
+    </div>
+  </div>
+</div>
+
+<div class="w-50 mx-auto my-4 bg-primary.bg-gradient" id="novo-pedido-container">
+  <p class="bg-dark fs-3 text-center p-2 m-0 text-light fw-bold">CONFIRA SEU PEDIDO</p>
+
+  <div class="w-100 bg-success-subtle mx-auto p-3">
+    
+    <!-- Loading / fallback -->
+    @if (carregando) { <!--Condição se caso o carregando for true-->
+      <div class="text-center p-3 fw-semibold">Carregando pedido...</div> <!--Se for, cria uma div com o texto de carregando pedindo...-->
+    }
+
+    <!--Caso não encontre-->
+    @else if (!carregando && !pedido) { <!--Caso o carregamento terminar e não encontrar nenhum pedido (falsy)-->
+      <div class="text-center p-3 text-danger fw-semibold">
+        Pedido não encontrado ou removido! <!--Cria uma div com o texto de Pedido não encontrado-->
+      </div>
+    }
+
+    <!--Nome Cliente-->
+    @else if (pedido) { <!--Agora se caso de fato encontrar o pedido-->
+      <div class="w-100 mb-3"> <!--Cria uma div container para encapsular o nome do cliente-->
+        <p class="px-1 m-0 fw-semibold fs-5">Nome do cliente</p>
+        <p class="p-2 form-control text-dark border-1 border-secondary-subtle rounded-2 w-100 bg-light">
+          {{ pedido.nome }} <!--pedido.nome será pra aplicar dinamicamente o nome de cada cliente-->
+        </p>
+      </div>
+
+      <!-- Carrinho -->
+      <p class="px-1 mt-2 mb-1 fw-semibold">Confira seu pedido</p>
+      <div class="form-control p-2 text-dark" style="height: auto; min-height: 100px; overflow-y: auto;">
+
+        <!--Fazemos duas verificações:
+        1° pedido.itens verificando se realmente existe o array de itens existe, para não quebrar o código com undefined
+        2° pedido.itens.length > 0 verificando se esse array há pelo menos 1 item adicionado, pois se não houver, irá cair no @else-->
+        @if (pedido.itens && pedido.itens.length > 0) {
+          
+          <!--Aqui iteramos (percorremos cada item, um por um) com o item of pedido.itens
+          E para orgazanizar/indenticar (track) cada um deles usamos o $index para numerá-los em índice (0, 1, 2, 3 )-->
+          @for (item of pedido.itens; track $index) { 
+            <div class="mb-1">
+              <span class="fw-semibold">{{ item.quantidade }}x</span> <!--Aqui formatamos com a quantidade do item e o x (ex: 2x, 3x)-->
+              <span> {{ item.item }}</span> <!--E aqui o pedido em si (Pizza Calabresa)-->
+            </div>
+          }
+        }
+        @else { <!--E caso contrário, não encontre nenhum item no carrinho-->
+          <div class="text-secondary">Nenhum item no carrinho</div> <!--Exibe uma div com a mensagem d que nenhum item foi encontrado-->
+        }
+      </div>
+
+      <div class="mt-3 fw-bold mx-auto w-50 text-center"> <!--Adicionamos uma di para encapsular o status do pedido-->
+        <p>Status</p> <!--Chamada do status-->
+        <p [id]="pedido.idStatus">{{ pedido.nomeStatus }}</p> <!--NgClass para iniciar e eventualmente alterar o status do pedido, que inicia como 'Preparando'-->
+      </div>
+
+    }
+    
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="container-fluid text-white fs-2 px-3 py-1" id="container-1">
+	<div class="row container-fluid">
+		<div class="col-4 text-start fw-semibold" id="pedidos">Pedidos+</div>
+		<div class="col-4 text-center"><a [routerLink]="['/home']"><img id="img" alt="Logo da Pizzaria"  src="/assets/icons/logo.png" width="110px"/></a></div>
+		<div class="col-4 text-end fw-semibold cursor-pointer" id="novo-pedido">
+			<a [routerLink]="['/pedidos']" id="span" class="p-2 text-nowrap rounded-3 ">Novo Pedido <i class="bi bi-arrow-right" id="seta-esquerda"></i></a>
+		</div>
+	</div>
+
+</div>
+
+<div class="w-75 bg-success-subtle mx-auto my-4 d-flex" style="font-size: 17px;" id="status">
+
+	<div class="p-3 w-50">
+		<p class="m-1">Filtro por status</p>
+
+<!--Nesse select usamos o ngModel, conhecido como "two-way data binding" no angular, que é a conexão entre a variável filtroStatus e o select,
+que consiste na mudança da opção do select e o status correspondente ao mesmo selecionado-->
+		<select class=" w-100 border-1 border-secondary-subtle rounded-2 form-select p-2" [(ngModel)]="filtroStatus">
+			<option>Todos</option>
+			<option>Preparando</option>
+			<option>Cancelado</option>
+			<option>Concluido</option>
+			<option>Entregue</option>
+		</select>
+	
+	</div>
+
+	
+	<div class="p-3 w-50">
+		<p class="m-1">Busca</p>
+
+<!--Nesse input, novamente usamos o ngModel, para conexão entre a variável filtroStatus e o input search, que consiste na busca da opção através
+do que for digitado no input e que corresponda ao que tiver de nome do cliente, número do pedido ou status-->
+		<input type="search" class="form-control border-1 border-secondary-subtle rounded-2 w-100 p-2" placeholder="Nome/Id/Status" [(ngModel)]="busca"/>
+	</div>
+
+</div>
+
+<div class="w-75 px-2 py-2 text-center bg-success-subtle mx-auto border-top  border-start border-end  border-primary-subtle rounded-2" style="font-size: 17px;" id="cliente-options">
+
+	<div class="row my-2 fw-bold" id="options">
+		<p class="col-4">Nome</p>
+		<p class="col-4">Número do Pedido</p>
+		<p class="col-3">Status</p>
+	</div>
+
+	<!--Usamos o @for, nova sintaxe do Angular que percorre o array pedidosFiltrados para listar nome dos clientes, número do pedido e status
+	E o track (rastreio) de cada item, é feito através do index ou seja índice, ou seja isso serve para cuidar de cada um individualmente, caso 
+	seja editado, excluído e etc-->
+	@for (pedido of pedidosFiltrados; track $index) {
+		<div class="row my-3">
+
+			<!--Aqui será o nome do cliente, listado no array pedidos-->	
+			<p class="col-4 text-break" style="word-break: break-word;" id="cliente">{{ pedido.nome }}</p>
+
+			<!--Aqui será o id do pedido, listado no array pedidos-->	
+			<p class="col-4" id="numero">{{ pedido.numero }}</p>
+
+			<!--Aqui será o status do pedido, listado no array pedidos que poderá ser alterado dinamicamente, por isso o ngClass e o Id estão []
+			OBS: o pedido.idStatus é para herdar os estilos no css e o nomeStatus para deixar escrito o status no singular para cada pedido-->	
+			<p class="col-3 mt-0 fw-bold" [id]="pedido.idStatus">{{ pedido.nomeStatus }}</p>
+
+			<!--Formatamos a URL do router link como "pedido-detalhe, pedido.numero" para justamente acessar o numero individual de cada pedido
+			e acessar a página individual do mesmo, a apesar da formatação, o angular concatena normal na url-->
+			<a [routerLink]="['/pedido-detalhe', pedido.numero]" class="col-1"><fa-icon [icon]="faChevronRight" id="chevron"></fa-icon></a>
+
+		</div>
+	}
+
+</div>
+
+

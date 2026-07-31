@@ -1,0 +1,93 @@
+<body class="bg-dark">
+
+	<div class="container-fluid bg-black bg-gradient text-white fs-2 px-3 py-2 mb-5" id="container-1">
+
+		<div class="row container-fluid">
+			<div class="col-4 text-start fw-semibold text-nowrap" id="pedidos">Controle de Pedidos</div>
+			 <div class="col-4 text-center" id="img-center"><a [routerLink]="['/home']"><img id="img" src="/assets/icons/logo.png" width="110px"/></a></div>
+			<div class="col-4 text-end" id="buscador">
+				<p>Busca</p>
+
+				<!--Nesse input, novamente usamos o ngModel, para conexão entre a variável filtroStatus e o input search, que consiste na busca da opção através
+				do que for digitado no input e que corresponda ao que tiver de nome do cliente, número do pedido ou status-->
+				<input type="search" 
+				class="form-control border-1 border-secondary-subtle rounded-2 p-2" 
+				placeholder="Cliente/Id/Status" 
+				[(ngModel)]="busca"/>
+			</div>
+		</div>
+
+	</div>
+
+	@for (pedido of pedidosFiltrados; track $index) { <!--Iteração para percorrer o array pedidos e identificar um por um pelo índice (index)-->
+
+		<div data-controle="options" 
+		class="w-75 p-2 mb-5 text-center bg-success-subtle mx-auto border-top  border-start border-end  border-primary-subtle rounded-2" 
+		id="cliente-options">
+
+			<div class="row mt-2 fw-bold p-0" id="options">
+				<p class="col-3">Nome</p>
+				<p id="nu-pedido" class="col-3">Número do Pedido</p>
+				<p class="col-3">Status</p>
+				<p class="col-3">Ações</p>
+			</div>
+
+
+			<div class="row m-0;">
+				<p class="col-3" id="cliente" style="word-break: break-word; margin: auto 0">{{ pedido.nome }}</p> <!--Nome dinâmico, puxado pelo array de pedidos-->
+				<p class="col-3" style="margin: auto 0;" id="numero">{{ pedido.numero }}</p> <!--Número do pedido pelo-->
+				<p class="col-3 fw-bold" style="margin: auto 0;" 
+				[id]="pedido.idStatus">{{ pedido.nomeStatus }}  <!--Estilos, classes e ids para manter lógicas e estilização de cada status-->
+					<span *ngIf="pedido.nomeStatus === 'Entregue' && contagemRestante[pedido.numero] !== undefined"> <!--Criamos uma condição com o ngIf, onde caso o status for 'Entregue' e haja de fato uma contagem para esse pedido ou seja !== de undefined-->
+     					 - Removendo em {{ contagemRestante[pedido.numero] }}s <!--Fazemos uma interpolação onde ocorrerá a decrementação de 1 segundo na contagem do cronômetro em tela-->
+    				</span>
+					<!--OBS: ESTAMOS USANDO O NGIF NESSE CASO, POIS É UMA EXPRESSÃO BOOLEANA Q NÃO HÁ SUPORETE OU USO PARA O @IF, QUE É O MÉTODO
+					MODERNO, ENT NESSE CASO SERÁ MANTIDO O ngIf-->
+				</p>
+				<p class="col-3 fs-7 text-nowrap" style="margin: auto 0;">
+
+					<!--Função de clique nesse botão, que tem o id toogle, relativo a deixar visível ou oculto, tanto as opções de edição de status
+					quanto o botão de confirmar a alteração do estatus do pedido
+					E o ngStyle para dar uma pequena alterada na posição do botão de editar, quando o outro elemento ficar visível, para UX
+					E por fim a mudança da palavra editar e voltar no botão de editar, quando ele for acionado na lógica de mostrar ou ocultar
+					os status de mudança do pedido-->
+					<button id="editar" 
+					(click)="toggle(pedido)" [ngStyle]="{ 'margin-left': pedido.visible ? '0' : '-13px' }"
+					class="btn btn-primary p-1 d-inline-block"> {{ pedido.textoBotao || 'Editar' }} </button>
+
+					<!--Já aqui é atribuido o gatilho fadeInOut para esse elemento que sairá de visível para oculto quando clicado-->
+					<!--Aqui é um operador ternário, abreviação de if ou else (="pedido.visible ? 'visible' : 'hidden'") onde analisa se a
+					condição é true (irá deixar visível) ou false (irá manter o botão oculto)-->
+					<button id="confirmar" 
+					[@fadeInOut]="pedido.visible ? 'visible' : 'hidden'" 
+					type="submit" 
+					class="btn text-white ms-1 p-1 bg-success"
+					(click)="confirmarAlteracao(pedido)"><!--E por fim a função de clique (confirmarAlteracao) que confirma a alteração de status, desde o front até o backend-->
+					Confirmar</button>
+				</p>
+			</div>
+
+		</div>	
+
+		<!--Novamente é atribuido o gatilho fadeInOut que sairá de visível para oculto e vice-versa baseado na condição do operador ternario-->
+		<!--E o evento de clique (Alterar StatusVisual) está ligado a function que criamos no typescript onde ao clicar no elemento p, ele irá
+		iterar o pedido específico através do for, e assim alterando seu nome de status (EX: Preparando => Pronto) e seu id de estilização css
+		para acompanhar o estilo do novo status em tela-->
+		<div class="m-0" id="options-edit" [@fadeInOut]="pedido.visible ? 'visible' : 'hidden'" >
+		<p class="mt-0 bg-warning p-1 text-center" id="preparando" 
+			(click)="alterarStatusVisual(pedido, 'Preparando', 'preparando')">Preparando</p>
+
+		<p class="mt-1 bg-success p-1 text-center" id="concluidos" 
+			(click)="alterarStatusVisual(pedido, 'Concluido', 'concluidos')">Concluído</p>
+
+		<p class="mt-1 bg-danger p-1 text-center" id="cancelados" 
+			(click)="alterarStatusVisual(pedido, 'Cancelado', 'cancelados')">Cancelado</p>
+
+		<p class="mt-1 bg-secondary p-1 text-center" id="entregues" 
+			(click)="alterarStatusVisual(pedido, 'Entregue', 'entregues')">Entregue</p>
+		</div>
+
+	}  
+
+</body>
+
