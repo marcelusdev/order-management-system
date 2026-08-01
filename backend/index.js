@@ -1,22 +1,41 @@
 const express = require('express');// Importa a biblioteca Express e o atribuímos a uma constante para que não seja reatribuida e esteja no escopo global, ela irá servir para uso get/post/delete nas requisições http, sendo mais flexível e menos verboso na conexão com o backend
-const app = express(); // Cria a instância do app expressm que é o coração do backend quando se trata de lidar com requisições http e afins
-app.use(express.json()); //Ao fazer requisições com json, o angular transforma ele em um objeto javascript, ou seja é o tradutor do json para o backend
-const PORT = process.env.PORT || 3000; // Porta do servidor backend ou do Render que iremos hospedar o backend
+
+const app = express(); // Cria a instância do app express, que é o coração do backend quando se trata de lidar com requisições http e afins
+
 const cors = require('cors'); //Por padrão os servidores não podem mandar/receber requisições de portas diferentes como é o caso do front (port 4200) e o back (3000), e o cors viabiliza isso, informando ao servidor que a requisição entre essas duas portas é permitida
-app.use(cors({origin: FRONTEND_URL})); //Habilitação do cors para que permita a conexão do backend e com o front, que são portas diferentes e por padrão não podem fazer requisição entre si, por isso o uso do middleware cors
-const dotenv = require('dotenv'); // Importa o dotenv, que permite ler variáveis de ambiente do arquivo .env que são as crendenciaos para se conectar ao banco
+
+const dotenv = require('dotenv'); // Importa o dotenv, que permite ler variáveis de ambiente do arquivo .env que são as credenciais para se conectar ao banco
+
 dotenv.config(); // Carrega as variáveis de ambiente definidas no arquivo .env
-const mongoose = require('mongoose'); // Importa o Mongoose, que é o ODM (biblioteca) responsável por conectar e interagir com o MongoDB
+
+const PORT = process.env.PORT || 3000; // Porta do servidor backend ou do Render que iremos hospedar o backend
+
 const MONGO_URI = process.env.MONGO_URI; // URI (Endereço único de conexão entre o servidor e o banco de dados) do banco, definida no .env
-const FRONTEND_URL = process.env.FRONTEND_URL;
+
+const FRONTEND_URL = process.env.FRONTEND_URL; // URL do frontend permitido para comunicação com o backend, definida no .env
+
+app.use(express.json()); //Ao fazer requisições com json, o Angular transforma ele em um objeto javascript, ou seja é o tradutor do json para o backend
+
+app.use(cors({origin: FRONTEND_URL})); //Habilitação do cors para que permita a conexão do backend com o front, que são origens diferentes e por padrão não podem fazer requisição entre si, por isso o uso do middleware cors
+
+const mongoose = require('mongoose'); // Importa o Mongoose, que é o ODM (biblioteca) responsável por conectar e interagir com o MongoDB
+
 const http = require('http'); //Criamos um servidor HTTP separado e próprio para usar com WebSocket
+
 const server = http.createServer(app); // Aqui criamos o servidor propriamente dito e colocamos o app como argumento, que é onde estão as requisições get/put/post/delete backend
-const { Server } = require('socket.io'); //Importando o Socket.IO chamado server, que criará o servidor WebSocket no backend, permitando a conexão em tempo real entre o backend e todos os servidores conectados ao mesmo
+
+const { Server } = require('socket.io'); //Importando o Socket.IO chamado Server, que criará o servidor WebSocket no backend, permitindo a conexão em tempo real entre o backend e todos os clientes conectados
+
 const io = new Server(server, { //Instanciamos o socket.io, passando dois argumentos, o primeiro é o próprio server http, assim compartilhando a mesma porta e domínio do express
+
   cors: { //E o cors, definindo quem pode se conectar, e através de quais métodos
+
     origin: FRONTEND_URL, //Origin define quem pode se conectar ao websocket
-    methods: ["GET", "POST", "PUT", "DELETE"] //E os métodos, no caso serão get, post, put e delete, todos relacionado a exibição e status dos pedidos
+
+    methods: ["GET", "POST", "PUT", "DELETE"] //E os métodos, no caso serão get, post, put e delete, todos relacionados a exibição e status dos pedidos
+
   }
+
 });
 
 //CONECTANDO O BANCO DA DADOS
