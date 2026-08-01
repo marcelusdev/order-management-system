@@ -1,21 +1,31 @@
 # 🍕 Order Management System — Angular + Node.js + MongoDB + Socket.io
 
-## 📦 Full-Stack Real-Time Order Management Application
+## 📦 Full-Stack Order Management System with Real-Time Updates
 
-This project is a complete order management system designed to simulate a real-world delivery environment, such as restaurants, pizzerias, and food services.
+This project is a complete **order management system** built to simulate a real-world food delivery environment, such as a pizzeria, restaurant, or fast-food business.
 
 The application allows users to create orders, track their status, view detailed information, and receive real-time updates using **Socket.io**.
 
-Built with **Angular on the frontend** and **Node.js + Express + MongoDB on the backend**, this project demonstrates full-stack integration, real-time communication, and a structured application architecture.
+Built with **Angular** on the frontend and **Node.js + Express + MongoDB** on the backend, the project demonstrates full-stack integration, real-time communication, and a well-structured architecture between client, server, and database.
 
 ---
 
-# PREVIEW
+# 📑 PREVIEW
 
 ![HOME](screenshots/home.png)
 ![ORDER](screenshots/order.png)
 ![CLIENT](screenshots/client.png)
 ![CONTROL](screenshots/control.png)
+
+---
+
+# 🌐 Live Demo
+
+🟢 **Frontend:**
+https://marcelusdev.github.io/order-management-system
+
+🟢 **Backend (API) (JSON endpoint):**
+https://order-management-system-xf7o.onrender.com/api/pedidos
 
 ---
 
@@ -40,6 +50,7 @@ Built with **Angular on the frontend** and **Node.js + Express + MongoDB on the 
 * Socket.io Server
 * CORS
 * dotenv
+* Render (Backend Deployment)
 
 ---
 
@@ -47,36 +58,36 @@ Built with **Angular on the frontend** and **Node.js + Express + MongoDB on the 
 
 ## 👨‍🍳 Order Creation
 
-* Customer registration with validation.
-* Product and flavor selection.
-* Quantity management.
-* Automatic cart calculation.
+* Customer registration with first and last name validation.
+* Product and pizza flavor selection.
+* Item quantity control.
+* Shopping cart with automatic total calculation.
 * Automatic order number generation.
-* HTTP POST communication with backend.
-* Success and error handling.
+* HTTP POST request to the backend.
+* Error and success message handling.
 
 ---
 
 ## 🏠 Orders Dashboard
 
-* Displays all active orders.
+* Displays all received orders.
 * Smart search by:
 
-  * Customer name;
+  * First name;
   * Last name;
   * Order number.
 * Status filtering.
-* Text normalization for better searches.
-* Real-time updates.
+* Accent-insensitive search normalization.
+* Automatic real-time updates.
 
 ---
 
 ## 🎛️ Control Panel
 
-* Complete order visualization.
-* Order status updates.
-* Backend communication through HTTP PUT.
-* Automatic synchronization using Socket.io.
+* View all orders.
+* Update order status.
+* Sends updates through HTTP PUT.
+* Instant synchronization for every connected client.
 
 ---
 
@@ -84,42 +95,65 @@ Built with **Angular on the frontend** and **Node.js + Express + MongoDB on the 
 
 * Complete order information.
 * Dynamic status styling.
-* Angular bindings and `ngClass` usage.
+* Angular animations using `ngClass` and property bindings.
 
 ---
 
 # 🔄 Real-Time Communication with Socket.io
 
-Socket.io enables instant communication between connected users.
+Socket.io allows every connected client to receive updates instantly.
 
 Whenever an order is created or updated:
 
-1. The frontend sends a request.
-2. The backend processes the data.
-3. MongoDB stores the information.
-4. Socket.io broadcasts the update.
-5. All connected clients receive the change instantly.
+1. The frontend sends the request to the backend.
+2. The backend stores or updates the data in MongoDB.
+3. The server emits an event through Socket.io.
+4. Every connected client receives the update immediately.
+
+No page refresh is required.
 
 ---
 
 # 🧱 Project Structure
 
-```text
-sistema-pedidos/
+order-management-system/
 │
 ├── backend/
 │   ├── models/
+│   │   └── Pedido.js
 │   ├── index.js
-│   ├── package.json
 │   ├── .env.example
-│   └── .gitignore
+│   └── package.json
+│
+├── screenshots/
+│   ├── home.png
+│   ├── client.png
+│   ├── control.png
+│   └── order.png
+│
+├── public/
 │
 ├── src/
-├── public/
+│   ├── app/
+│   │   ├── pages/
+│   │   │   ├── home/
+│   │   │   ├── pedidos/
+│   │   │   ├── controle/
+│   │   │   └── pedido-detalhe/
+│   │   ├── services/
+│   │   ├── api.ts
+│   │   ├── app.config.ts
+│   │   └── app.routes.ts
+│   │
+│   ├── assets/
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.css
+│
 ├── angular.json
 ├── package.json
 └── README.md
-```
+
 
 ---
 
@@ -127,7 +161,7 @@ sistema-pedidos/
 
 ## Backend
 
-Navigate to backend:
+Navigate to the backend folder:
 
 ```bash
 cd backend
@@ -139,7 +173,7 @@ Install dependencies:
 npm install
 ```
 
-Create your `.env` file based on `.env.example`:
+Create a `.env` file based on `.env.example`:
 
 ```env
 MONGO_URI=your_mongodb_connection_string
@@ -147,13 +181,13 @@ PORT=3000
 FRONTEND_URL=http://localhost:4200
 ```
 
-Run:
+Start the server:
 
 ```bash
 npm start
 ```
 
-Backend runs on:
+The backend will run at:
 
 ```text
 http://localhost:3000
@@ -169,13 +203,13 @@ From the project root:
 npm install
 ```
 
-Run:
+Run the application:
 
 ```bash
 ng serve
 ```
 
-Frontend runs on:
+The frontend will run at:
 
 ```text
 http://localhost:4200
@@ -185,35 +219,25 @@ http://localhost:4200
 
 # 🔐 Environment Variables
 
-Sensitive information is not stored directly in the source code.
+Sensitive information, such as the MongoDB connection string, is never stored directly in the source code.
 
 The project uses:
 
-* `.env` → local private configuration.
-* `.env.example` → public configuration template.
+* `.env` → Local private configuration.
+* `.env.example` → Public template for project setup.
 
 ---
 
-# 🌟 Skills Demonstrated
+# 🌟 What I Learned
 
-* Full-stack application architecture.
-* Angular standalone components.
-* Backend API development.
-* MongoDB integration.
-* Real-time communication with Socket.io.
-* RxJS reactive programming.
-* Environment variable management.
-* Git and GitHub best practices.
-
----
-
-# 🛠️ Future Improvements
-
-* Authentication system.
-* User management.
-* Order history.
-* Administrative reports.
-* Automatic notifications.
+* Full-stack architecture separating frontend, backend, and database.
+* Angular Standalone Components.
+* Shared services for component communication.
+* RxJS Observables.
+* Real-time communication using Socket.io.
+* Environment variable configuration.
+* Backend deployment with Render.
+* Git version control best practices.
 
 ---
 
@@ -221,30 +245,36 @@ The project uses:
 
 **Marcelo Eduardo**
 
-Full-stack portfolio project focused on modern web development, system integration, and clean architecture.
+Portfolio project focused on Full-Stack development, technology integration, and software engineering best practices.
+
+GitHub: https://github.com/marcelusdev
+LinkedIn: https://linkedin.com/in/marcelo-eduardo-660855424
 
 
 
+<!--VERSÃO EM PORTUGUES-->
 
-
-
-
-
-
-
-
-
-<!-- README VERSÃO PORTUGUÊS-->
 
 # 🍕 Sistema de Pedidos — Angular + Node.js + MongoDB + Socket.io
 
 ## 📦 Sistema Full-Stack com Atualização em Tempo Real
 
-Este projeto é um sistema completo de gerenciamento de pedidos desenvolvido para simular o funcionamento de um ambiente real de delivery (como pizzarias, restaurantes ou lanchonetes).
+Este projeto é um sistema completo de gerenciamento de pedidos desenvolvido para simular o funcionamento de um ambiente real de delivery, como pizzarias, restaurantes ou lanchonetes.
 
 A aplicação permite criar pedidos, acompanhar seu status, visualizar informações detalhadas e sincronizar todas as alterações em tempo real utilizando **Socket.io**.
 
-Construído com **Angular no frontend** e **Node.js + Express + MongoDB no backend**, o projeto demonstra integração full-stack, comunicação em tempo real e organização de arquitetura entre cliente, servidor e banco de dados.
+Construído com **Angular no frontend** e **Node.js + Express + MongoDB** no backend, o projeto demonstra integração full-stack, comunicação em tempo real e uma arquitetura organizada entre cliente, servidor e banco de dados.
+
+---
+
+# 🌐 Demonstração
+
+**Frontend:**
+https://marcelusdev.github.io/order-management-system
+
+**Backend (API) (JSON endpoint):**
+https://order-management-system-xf7o.onrender.com/api/pedidos
+
 
 ---
 
@@ -269,6 +299,7 @@ Construído com **Angular no frontend** e **Node.js + Express + MongoDB no backe
 * Socket.io Server
 * CORS
 * dotenv
+* Render (Deploy do Backend)
 
 ---
 
@@ -311,7 +342,7 @@ Construído com **Angular no frontend** e **Node.js + Express + MongoDB no backe
 
 ## 📋 Detalhes do Pedido
 
-* Exibição completa das informações.
+* Exibição completa das informações do pedido.
 * Status com estilização dinâmica.
 * Animações e alterações visuais utilizando Angular (`ngClass` e bindings).
 
@@ -321,10 +352,10 @@ Construído com **Angular no frontend** e **Node.js + Express + MongoDB no backe
 
 O Socket.io permite que todos os usuários conectados recebam alterações instantaneamente.
 
-Quando um pedido é criado ou atualizado:
+Sempre que um pedido é criado ou atualizado:
 
 1. O frontend envia a requisição para o backend.
-2. O backend salva ou altera os dados no MongoDB.
+2. O backend salva ou atualiza os dados no MongoDB.
 3. O servidor dispara um evento através do Socket.io.
 4. Todos os clientes conectados recebem a atualização automaticamente.
 
@@ -334,27 +365,44 @@ Dessa forma, não é necessário atualizar a página manualmente.
 
 # 🧱 Estrutura do Projeto
 
-```text
-sistema-pedidos/
+order-management-system/
 │
 ├── backend/
 │   ├── models/
 │   │   └── Pedido.js
 │   ├── index.js
-│   ├── package.json
-│   ├── package-lock.json
 │   ├── .env.example
-│   └── .gitignore
+│   └── package.json
+│
+├── screenshots/
+│   ├── home.png
+│   ├── client.png
+│   ├── control.png
+│   └── order.png
+│
+├── public/
 │
 ├── src/
-├── public/
+│   ├── app/
+│   │   ├── pages/
+│   │   │   ├── home/
+│   │   │   ├── pedidos/
+│   │   │   ├── controle/
+│   │   │   └── pedido-detalhe/
+│   │   ├── services/
+│   │   ├── api.ts
+│   │   ├── app.config.ts
+│   │   └── app.routes.ts
+│   │
+│   ├── assets/
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.css
+│
 ├── angular.json
 ├── package.json
-├── package-lock.json
 └── README.md
-```
 
----
 
 # ⚙️ Instalação e Execução
 
@@ -422,31 +470,23 @@ Informações sensíveis, como a conexão com o MongoDB, não são armazenadas d
 
 O projeto utiliza:
 
-* `.env` → arquivo local com informações privadas.
-* `.env.example` → modelo público para configuração.
+* `.env` → Arquivo local com informações privadas.
+* `.env.example` → Modelo público para configuração do projeto.
 
 ---
 
 # 🌟 Aprendizados e Boas Práticas
 
-* Arquitetura full-stack separando frontend, backend e banco.
-* Uso de Angular Standalone Components.
+* Arquitetura full-stack separando frontend, backend e banco de dados.
+* Utilização de Angular Standalone Components.
 * Serviços compartilhados para comunicação entre componentes.
 * Uso de RxJS Observables.
 * Integração de WebSocket com Socket.io.
 * Configuração de variáveis de ambiente.
+* Deploy do backend utilizando Render.
 * Boas práticas de versionamento com Git.
 
 ---
-
-# 🛠️ Próximas Melhorias
-
-* Sistema de autenticação.
-* Controle de usuários.
-* Histórico de pedidos.
-* Relatórios administrativos.
-* Notificações automáticas.
-
 ---
 
 # 👨‍💻 Autor
@@ -454,3 +494,7 @@ O projeto utiliza:
 **Marcelo Eduardo**
 
 Projeto desenvolvido para portfólio com foco em desenvolvimento Full-Stack, integração de tecnologias e boas práticas de programação.
+
+GitHub: https://github.com/marcelusdev
+LinkedIn: https://linkedin.com/in/marcelo-eduardo-660855424
+

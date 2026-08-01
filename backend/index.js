@@ -3,7 +3,7 @@ const app = express(); // Cria a instância do app expressm que é o coração d
 app.use(express.json()); //Ao fazer requisições com json, o angular transforma ele em um objeto javascript, ou seja é o tradutor do json para o backend
 const PORT = process.env.PORT || 3000; // Porta do servidor backend ou do Render que iremos hospedar o backend
 const cors = require('cors'); //Por padrão os servidores não podem mandar/receber requisições de portas diferentes como é o caso do front (port 4200) e o back (3000), e o cors viabiliza isso, informando ao servidor que a requisição entre essas duas portas é permitida
-app.use(cors()); //Habilitação do cors para que permita a conexão do backend na porta 3000 com o front na porta 4200, que são portas diferentes e por padrão não podem fazer requisição entre si, por isso o uso do middleware cors
+app.use(cors({origin: FRONTEND_URL})); //Habilitação do cors para que permita a conexão do backend e com o front, que são portas diferentes e por padrão não podem fazer requisição entre si, por isso o uso do middleware cors
 const dotenv = require('dotenv'); // Importa o dotenv, que permite ler variáveis de ambiente do arquivo .env que são as crendenciaos para se conectar ao banco
 dotenv.config(); // Carrega as variáveis de ambiente definidas no arquivo .env
 const mongoose = require('mongoose'); // Importa o Mongoose, que é o ODM (biblioteca) responsável por conectar e interagir com o MongoDB
@@ -24,7 +24,7 @@ mongoose.connect(MONGO_URI) //Chamamos a função de conexão do mongo, tendo co
   .then(() => { //Quando a conexão é bem sucedida, é tratado com then que apresenta o que ocorrerá após a conexão ser estabelecida
     console.log('✅ Conectado ao MongoDB com sucesso!'); //Primeiro uma mensagem de sucesso no console/terminal
     server.listen(PORT, () => { //E depois sim, a inicialzação do servidor backend junto ao socket.io, que vão dividir o mesmo servidor e porta, onde um lida com as requisições (express) e o outro com essas mudanças em tempo (real)
-      console.log(`Servidor rodando em http://localhost:${PORT}`); //Com também a mensagem de bem sucedido no console, sobre o servidor
+      console.log(`Servidor rodando na porta ${PORT}`); //Com também a mensagem de bem sucedido no console, sobre o servidor
     });
   })
   .catch(err => console.error('❌ Erro ao conectar ao MongoDB:', err)); //E caso de erro de conexão com o mongo, o catch irá capturar o erro e imprimir a mensagem de erro no console

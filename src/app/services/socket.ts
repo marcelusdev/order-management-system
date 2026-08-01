@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'; //Importando injectable do angular, para uso do socket service como injetável em outra aplicação
 import { io, Socket } from 'socket.io-client'; //Impport do io, que conecta o angular (cliente), com o servidor socket.io (node.js) e o Socket que é o tipo de conexão, usado para declaração de var de um socket ativo
 import { Observable } from 'rxjs'; //Importamos o Observable para lidar com os eventos do Socket.io, que ouve e reage automaticamente
+import { API_URL } from '../api'; //Import da URL que vira da API do render que hospeda o backend
 
 @Injectable({ //Decorador Angular que marca a classe como injetável
   providedIn: 'root' //E o providedinroot permite seu uso em uma instância global, através de uma única conexão ao invés de ser declarada em providers em várias conexões
@@ -12,12 +13,12 @@ export class SocketService { //Inicio da definição da classe e as todas suas f
 
   constructor() { //Constructor é um método angular que executa assim que a aplicação for criada, ou seja, quando o socket service, inicia, o constructor executa o que estiver dentro dele
 
-    //O io (client.io) cria uma conexão em tempo real com a porta do backend (3000) em tempo real, através de uma única conexão aberta em todo
+    //O io (client.io) cria uma conexão em tempo real com a porta do backend em tempo real, através de uma única conexão aberta em todo
     //tempo até que a aplicação seja desconectada, OU SEJA, diferente das requisições http que fecham após responderem.
     //Além de ser uma conexão bidirecional onde o cliente pode emitir mensagens ao servidor e vice-versa.
     //E justamente por ser uma conexão global e única disponível em todas as intâncias que ela é declarada no constructor, ou seja, é chamada
     //apenas uma vez, até que a conexão seja interrompida. O que seria diferente se tivese que ser declarada várias vezes em diferentes componentes
-    this.socket = io('http://localhost:3000'); 
+    this.socket = io(API_URL);
   }
 
   //MÉTODO LISTEN PARA OUVIR DIFERENTES EVENTOS DO SERVIDOR BACKEND, ATRAVÉS DE UM ÚNICO MÉTODO NO SOCKET (VERSÃO ENXUTA)

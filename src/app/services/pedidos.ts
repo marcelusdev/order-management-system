@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'; //Decorador do angular que marca ess
 import { HttpClient } from '@angular/common/http'; //É a API do Angular, usada para fazer requisições HTTP (get/post/delete, etc) com o backend
 import { Observable } from 'rxjs'; //Chamada de Reactive Extensions for Javascript o rxjs é uma biblioteca que trabalha com programação reativa, no caso usmaos o observable, que terá uma resposta única para a requisição HTTP, onde usaremos next caso positiva, error se caso negativa e complete caso finalizada
 import { map } from 'rxjs/operators'; //Importamos o método de encadeamento de fluxo de dados (map) através da biblioteca rxjs, que é justamente uma biblioteca de método para lidar com dados assíncronos
+import { API_URL } from '../api'; //Import da URL que vira da API do render que hospeda o backend
 
 
 //Shape/Interface que irá servir de molde para cada item dentro do pedido-detalhe
@@ -40,7 +41,7 @@ export interface Pedido { //Tornamos essa interface exportável para outros comp
 //Classe de comunicação com o backend
 export class PedidosService { //Exportando a classe para usar em outros components
 
-  private apiUrl = 'http://localhost:3000/api/pedidos'; //URL ajustada conforme Backend, para uso do get/post e etc, e o private para que só seja usada nessa instância
+ private apiUrl = `${API_URL}/api/pedidos`; //URL ajustada conforme Backend, para uso do get/post e etc, e o private para que só seja usada nessa instância
 
   constructor(private http: HttpClient) {} //O Angular injeta uma instância de HTTPClient para uso privado do get/post no backend
 

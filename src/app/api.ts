@@ -1,0 +1,1 @@
+export const API_URL = 'https://order-management-system-xf7o.onrender.com';
