@@ -241,6 +241,15 @@ The project uses:
 
 ---
 
+# > ⚠️ **Note**
+>
+> This project uses the free tiers of **Render** and **MongoDB Atlas**.
+> After long periods of inactivity, the backend may take a few moments to wake up on the first request.
+>
+> If the application does not respond immediately or the orders are not displayed at first, simply wait a few seconds and refresh the page. Once the services are active, the application works normally.
+
+---
+
 # 👨‍💻 Author
 
 **Marcelo Eduardo**
@@ -252,7 +261,7 @@ LinkedIn: https://linkedin.com/in/marcelo-eduardo-660855424
 
 
 
-<!--VERSÃO EM PORTUGUES-->
+<!--PORTUGUESE VERSION/ VERSÃO EM PORTUGUES-->
 
 
 # 🍕 Sistema de Pedidos — Angular + Node.js + MongoDB + Socket.io
@@ -487,6 +496,13 @@ O projeto utiliza:
 * Boas práticas de versionamento com Git.
 
 ---
+> ⚠️ **Observação**
+>
+> Este projeto utiliza os planos gratuitos do **Render** e do **MongoDB Atlas**.
+> Após longos períodos de inatividade, o backend pode levar alguns instantes para ser reativado na primeira requisição.
+>
+> Caso a aplicação não responda imediatamente ou os pedidos não sejam exibidos no primeiro acesso, basta aguardar alguns segundos e atualizar a página. Assim que os serviços forem reativados, a aplicação funcionará normalmente.
+
 ---
 
 # 👨‍💻 Autor
