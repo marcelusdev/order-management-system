@@ -179,7 +179,7 @@ html,body{
   #editar, #confirmar{
     font-size: 13px !important;
     padding: 2px 2px !important;
-    left: 15px;
+    left: 7px;
 
   }
 
@@ -220,8 +220,8 @@ html,body{
   }
 
   #editar, #confirmar{
-    left: 23px;
-    font-size: 12px !important;
+    left: 16px;
+    font-size: 11px !important;
   }
   
   #options-edit{
@@ -262,8 +262,8 @@ html,body{
    }
 
   #editar, #confirmar{
-    font-size: 10px !important;
-    left: 18px;
+    font-size: 9px !important;
+    left: 10px;
   }
 
   #options-edit{
