@@ -200,4 +200,44 @@ textarea{resize: none;}
     }
 }
 
+@media screen and (max-width: 490px) {
+
+  #novo-pedido{
+    font-size: 13px !important;
+     position: relative;
+    top: -10px;
+   
+  }
+  
+  #img{
+    width: 65px !important;
+  }
+
+  #pedidos{
+    font-size: 15px;
+     position: relative;
+     top: -10px;
+   
+  }
+
+}
+
+@media screen and (max-width: 380px) {
+
+    #novo-pedido{
+    font-size: 10px !important;   
+  }
+  
+  #img{
+    width: 55px !important;
+  }
+
+  #pedidos{
+    font-size: 12px;
+  }
+
+
+ 
+}
+
 

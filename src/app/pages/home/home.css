@@ -195,3 +195,58 @@ html,body{
   }
 
 }
+
+@media screen and (max-width: 490px) {
+
+  #pedidos{
+    position: relative;
+    font-size: 20px;
+    top: -10px;
+  }
+  
+
+  #img{
+    width: 70px;
+  }
+
+  #novo-pedido{
+    font-size: 15px;
+    position: relative;
+    right: 10px;
+    top: -10px;
+  }
+
+  
+  #cancelados, #concluidos, #entregues{
+    font-size: 14px;
+  }
+
+   #preparando{
+    font-size: 13px;
+   }
+
+ 
+}
+
+@media screen and (max-width: 350px) {
+
+  #pedidos{
+    position: relative;
+    left: -10px;
+   
+  }
+  
+
+  #img{
+    width: 70px;
+    left: -18px;
+  }
+
+  #novo-pedido{
+    font-size: 14px;
+    position: relative;
+   
+  }
+
+ 
+}
