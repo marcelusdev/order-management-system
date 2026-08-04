@@ -1,3 +1,12 @@
+# 🌎 Language / Idioma
+
+- 🇺🇸 [English](#english)
+- 🇧🇷 [Português](#português)
+
+---
+
+# English
+
 # 🍕 Order Management System — Angular + Node.js + MongoDB + Socket.io
 
 ## 📦 Full-Stack Order Management System with Real-Time Updates
@@ -256,12 +265,12 @@ The project uses:
 
 Portfolio project focused on Full-Stack development, technology integration, and software engineering best practices.
 
-GitHub: https://github.com/marcelusdev
-LinkedIn: https://linkedin.com/in/marcelo-eduardo-660855424
+- GitHub: https://github.com/marcelusdev
+- LinkedIn: https://linkedin.com/in/marcelo-eduardo-660855424
 
+---
 
-
-<!--PORTUGUESE VERSION/ VERSÃO EM PORTUGUES-->
+## PORTUGUÊS
 
 
 # 🍕 Sistema de Pedidos — Angular + Node.js + MongoDB + Socket.io
@@ -511,6 +520,6 @@ O projeto utiliza:
 
 Projeto desenvolvido para portfólio com foco em desenvolvimento Full-Stack, integração de tecnologias e boas práticas de programação.
 
-GitHub: https://github.com/marcelusdev
-LinkedIn: https://linkedin.com/in/marcelo-eduardo-660855424
+- GitHub: https://github.com/marcelusdev
+- LinkedIn: https://linkedin.com/in/marcelo-eduardo-660855424
 
